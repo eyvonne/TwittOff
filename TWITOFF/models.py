@@ -1,4 +1,4 @@
-''' SQLAlchecmy models for twittoff'''
+"""SQLALchemy models for Twitoff"""
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -6,22 +6,21 @@ DB = SQLAlchemy()
 
 
 class User(DB.Model):
-    '''Twitter users that we pull and analyze'''
+    """Twitter users that we pull and analyze"""
     id = DB.Column(DB.Integer, primary_key=True)
     name = DB.Column(DB.String(15), nullable=False)
+    newest_tweet_id = DB.Column(DB.BigInteger)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.name)
 
 
 class Tweet(DB.Model):
-    '''tweets'''
+    """Tweets"""
     id = DB.Column(DB.Integer, primary_key=True)
     text = DB.Column(DB.Unicode(280))
+    user_id = DB.Column(DB.Integer, DB.ForeignKey('user.id'), nullable=False)
+    user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
 
-
-def addUser(name):
-    DB.session.add(User(name=name))
-    DB.session.commit()
-
-
-def addTweet(text):
-    DB.session.add(Tweet(text=text))
-    DB.session.commit()
+    def __repr__(self):
+        return '<Tweet {}>'.format(self.text)
