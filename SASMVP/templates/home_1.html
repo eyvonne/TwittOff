@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1> this page is for {{ name }}</h1>
+
+    <h1> list example {{ mylist }} </h1>
+
+    <h1> indexing the list {{ mylist[0] }}</h1>
+
+    <h1> extracting from dictionary {{ mydict['pupname'] }} </h1>
+
+      <ul> {% for puppyname in puppies %}
+        <li>{{ puppyname }} </li>
+      {% endfor %}
+    </ul>
+
+    <p> {% if 'luna' in puppies %} </p>
+    <p> found you in the list luna </p>
+    {% else %}
+    <p> couldnt find you </p>
+    {% endif %}
+
+  </body>
+</html>

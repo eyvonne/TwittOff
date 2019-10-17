@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <p>This is a picture of a {{ dogType }} </p>
+    <p> <img src="{{ picture }}" alt="random Dog"> </p>
+    {% block content %}
+    <form action="/breed" method="post">
+      <select name="breed">
+        {% for breed in breeds %}
+        <option value="{{ breed }}">{{ breed }} </option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="See Dog">
+    </form>
+    {% endblock %}
+  </body>
+</html>
